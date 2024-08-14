@@ -22,7 +22,7 @@ public class Transactions extends JFrame implements ActionListener {
         add(image);
 
         JLabel text = new JLabel("Please select your Transaction");
-        text.setBounds(235,300,700,35);
+        text.setBounds(215,300,700,35);
         text.setForeground(Color.WHITE);
         text.setFont(new Font("System", Font.BOLD, 16));
         image.add(text);
@@ -32,7 +32,7 @@ public class Transactions extends JFrame implements ActionListener {
         deposit.addActionListener(this);
         image.add(deposit);
 
-        withdrawl = new JButton("Withdraw");
+        withdrawl = new JButton("Cash Withdrawl");
         withdrawl.setBounds(355,415,150,30);
         withdrawl.addActionListener(this);
         image.add(withdrawl);
@@ -77,6 +77,9 @@ public class Transactions extends JFrame implements ActionListener {
         } else if (e.getSource() == withdrawl){
             setVisible(false);
             new Withdrawl(pinNumber).setVisible(true);
+        } else if (e.getSource() == fastCash){
+            setVisible(false);
+            new FastCash(pinNumber).setVisible(true);
         }
     }
     public static void main(String[] args) {
