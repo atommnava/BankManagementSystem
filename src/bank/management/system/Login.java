@@ -7,12 +7,37 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 
+/*
+ * @brief La clase Login es el principal archivo en el que se estara guiando al usuario desde la ventana principal de un sistema de banco,
+ *        con el propósito de manejar un cuenta bancaria, la cual involucra una mayor fluidez y eficiencia para una cuenta bancaria. Estas son las opciones a las que
+ *        el usuario puede adentrarse con la acción de un click.
+ *        A) 'SIGN IN'. En orden para ingresar a su cuenta bancaria,
+ *            el cliente cuenta con dos espacios con lo cual, llenara con sus credenciales: 
+ *            1. No. de tarjeta
+ *            2. PIN
+ *        B) 'SIGN UP'. Un sistema para el manejo de una cuenta bancaria no funciona en caso de no integrar con una opción de registro,
+ *            con base a lo anterior, el usuario será trnasferido a una nueva ventana con la cual se le solicitaran algunos datos personales.
+ *        C) 'CLEAR'. Una simple función que le ofrece al usuario la posibilidad de limpiar el espacio para la entrada de datos bancarios en la
+ *            entrada principal
+ *            
+ *       
+ * @author Atom Alexander M. Nava
+ * @date 16/08/24
+ */
+
+
 public class Login extends JFrame implements ActionListener {
 
+    // Variables globales
     JButton login, signUp, clear;
     JTextField cardTextField;
     JPasswordField pinTextField;
 
+    /*
+     * @brief Constructor 'Login' que crea la ventana principal, con la impletación de labels, text-fields y botones.
+     * @author Atom Alexander M. Nava
+     * @date 16/08/24
+     */
     Login(){
         setTitle("ATM");
         setLayout(null);
@@ -25,8 +50,8 @@ public class Login extends JFrame implements ActionListener {
 
         JLabel text = new JLabel("Welcome User");
         text.setForeground(Color.white);
-        text.setFont(new Font("Times New Roman",Font.BOLD,38));
-        text.setBounds(200, 40, 400, 40);
+        text.setFont(new Font("Times New Roman",Font.BOLD,48));
+        text.setBounds(120, 40, 400, 40);
         add(text);
 
         JLabel cardNo = new JLabel("Card No: ");
@@ -92,6 +117,13 @@ public class Login extends JFrame implements ActionListener {
     }
 
     @Override
+    /* @brief La clase login implementa la interfaz 'ActionListener' en orden para responder a eventos,
+     *        con base a la acción del usuario, sabremos si desea ingersar con sus credenciales o registrarse.
+     * 
+     * @param e. Parámetro e funciona para responder a eventos diferentes a los que el usuario tiene acceso.
+     * @author Atom Alexander M. Nava
+     * @date 16/08/24
+     */
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == clear) {
             cardTextField.setText("");
@@ -108,7 +140,7 @@ public class Login extends JFrame implements ActionListener {
                     setVisible(false);
                     new Transactions(pinNumber).setVisible(true);
                 } else {
-                    JOptionPane.showMessageDialog(null, "Incorrect Card Number or PIN");
+                    JOptionPane.showMessageDialog(null, "Invalid Card Number");
                 }
             } catch(Exception ex) {
                 System.out.println(ex);
@@ -120,7 +152,13 @@ public class Login extends JFrame implements ActionListener {
         }
 
     }
-
+    /*
+     * @brief Método principal. Función donde corre el programa principal e implementa todas las funciones
+     *                          del sistema de banco.
+     * @param args. Punto de entrada
+     * @author Atom Alexander M. Nava
+     * @date 16/08/24
+     */
     public static void main(String[] args) {
         new Login();
     }
