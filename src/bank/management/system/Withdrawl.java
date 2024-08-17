@@ -5,11 +5,25 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
 
+/*
+ * @brief La clase 'Withdrawl' representa el desembolso de dinero que se realizara a la cuenta en particular, la cantidad ingresada desde teclado por el cliente será lo que se restarade la cuenta.
+ *        Similar a la clase 'Deposit' cuenta con un botón 'Back' para continuar realizando operaciones.
+ * @author Atom Alexander M. Nava
+ * @date 17/08/24
+ */
 public class Withdrawl extends JFrame implements ActionListener {
+    // Variables globales
     JTextField amount;
     JButton withdraw, back;
     String pinNumber;
-
+    /*
+     * @brief Constructor 'Withdrawl' en donde se dirige al cliente a una ventana diferente con la posibilidad de ingresar una cantidad
+     *        'valida' a desembolsar en su cuenta. El usuario puede retractarse  en cualquer momento de la operación y cancelarlo pulsando el botón 'back'
+     * @param formNo. Su funcionalidad es para llevar el correcto manejo de las cuentas de banco en función de su
+     *                número de formulario.  
+     * @author Atom Alexander M. Nava
+     * @date 17/08/24
+     */
     Withdrawl(String pinNumber){
         this.pinNumber = pinNumber;
         setLayout(null);
@@ -45,6 +59,14 @@ public class Withdrawl extends JFrame implements ActionListener {
         setLocation(300,0);
         setVisible(true);
     }
+     /*
+     * @brief Implementación de la interfaz 'Action Listener'.
+     *        El desembolso se almacena temporalmente con la fecha de expedición, estos datos quedan
+     *        registrados en nuestra base con el tipo de movimiento que se realizo, en este caso 'Desembolso'.
+     * @param e. Botón 'withdrawl' para responder a la orden del usuario
+     * @author Atom Alexander M. Nava
+     * @date 17/08/24
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == withdraw) {
@@ -54,6 +76,7 @@ public class Withdrawl extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Please, enter an available amount to deposit");
             } else {
                 try {
+                    //Conexión con MySQL
                     Conn conn = new Conn();
                     String query = "insert into bank values('" + pinNumber + "', '" + date + "', 'Withdrawl',  '" + number + "')";
                     conn.s.executeUpdate(query);
@@ -69,6 +92,11 @@ public class Withdrawl extends JFrame implements ActionListener {
             new Transactions(pinNumber).setVisible(true);
         }
     }
+     /*
+     * @brief Método principal para ejecutar la funcionalidad de la clase 'Withdrawl'.
+     * @author Atom Alexander M. Nava
+     * @date 17/08/24
+     */
     public static void main(String[] args) {
         new Withdrawl("");
     }
