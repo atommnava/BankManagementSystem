@@ -5,11 +5,27 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
 
+/*
+ * @brief La clase 'Deposit' acumula a lo sumo la cantidad ingresada desde teclado por el cliente, el programa comprueba que el cliente
+ *        haya ingresado una cantidad en teclado $. Para continuar, el usuario debe pulsar el botón 'back' para ser redirigido al inicio.
+ * @author Atom Alexander M. Nava
+ * @date 17/08/24
+ */
 public class Deposit extends JFrame implements ActionListener {
+
+    //Variables globales
     JTextField amount;
     JButton deposit, back;
     String pinNumber;
 
+    /*
+     * @brief Constructor 'Deposit' en donde se dirige al cliente a una ventana diferente con la posibilidad de ingresar una cantidad
+     *        'valida' a depositar en su cuenta. El usuario puede salir de la retractarse de la acción de depositar pulsando el botón 'back'
+     * @param formNo. Su funcionalidad es para llevar el correcto manejo de las cuentas de banco en función de su
+     *                número de formulario.  
+     * @author Atom Alexander M. Nava
+     * @date 17/08/24
+     */
     Deposit(String pinNumber){
         this.pinNumber = pinNumber;
         setLayout(null);
@@ -45,6 +61,14 @@ public class Deposit extends JFrame implements ActionListener {
         setLocation(300,0);
         setVisible(true);
     }
+     /*
+     * @brief Implementación de la interfaz 'Action Listener'.
+     *        El deposito de almacena temporalmente con la fecha de expedición, estos quedan
+     *        registrados en la base de datos con el tipo de movimiento que se realizo, en este caso 'Deposito'.
+     * @param e. Botón 'deposit' para responder a la orden del usuario
+     * @author Atom Alexander M. Nava
+     * @date 17/08/24
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == deposit) {
@@ -54,6 +78,7 @@ public class Deposit extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Please, enter an available amount to deposit");
             } else {
                 try {
+                    // Conexión con la base de datos MySQL
                     Conn conn = new Conn();
                     String query = "insert into bank values('" + pinNumber + "', '" + date + "', 'Deposit',  '" + number + "')";
                     conn.s.executeUpdate(query);
@@ -69,6 +94,11 @@ public class Deposit extends JFrame implements ActionListener {
             new Transactions(pinNumber).setVisible(true);
         }
     }
+    /*
+     * @brief Método principal para ejecturar la funcionalidad de la clase 'Deposit'.
+     * @author Atom Alexander M. Nava
+     * @date 17/08/24
+     */
     public static void main(String[] args) {
         new Deposit("");
     }
