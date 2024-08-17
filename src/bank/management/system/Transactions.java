@@ -5,11 +5,27 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/*
+ * @brief La clase 'Transactions' requiere la interfaz 'ActionListener' para manipular el cajero a propósito de realizar movimientos
+ *        bancarios en la cuenta del cliente. Esta clase conecta la parte gráfica con el sistema de cajero ATM, que cuenta con la ayuda de
+ *        las clases para el correcto funcionamiento de un sistema de cajero ATM, añadiendole mayor realismo al programa.
+ * @author Atom Alexander M. Nava
+ * @date 17/08/24
+ */
 public class Transactions extends JFrame implements ActionListener {
 
+    //Variables globales
     JButton deposit, withdrawl, miniStatement, pinChange,
     fastCash, balanceenQuiry, exit;
     String pinNumber;
+    /*
+     * @brief Constructor 'Transactions' para la creación del cajero ATM que jugara el papel importante como intermediario
+     *        para llevar a cabo todas las funcionalidades, con el fin de realizar movimientos para una cuenta bancaria.
+     * @param formNo. Su funcionalidad es para llevar el correcto manejo de las cuentas de banco en función de su
+     *                número de formulario.
+     * @author Atom Alexander M. Nava
+     * @date 17/08/24
+     */
     Transactions(String pinNumber){
         this.pinNumber = pinNumber;
         setLayout(null);
@@ -67,6 +83,13 @@ public class Transactions extends JFrame implements ActionListener {
         setUndecorated(true);
         setVisible(true);
     }
+    /*
+     * @brief Implemetación de la interfaz 'ActionListener' para llevar a cabo todas las funcionalidades del sistema
+     *        de cajero ATM para que el usuario realice movimientos en su cuenta.
+     * @param e. Parámetro e para responder a los eventos del usuario.
+     * @author Atom Alexander M. Nava
+     * @date 17/08/24
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == exit){
@@ -90,6 +113,11 @@ public class Transactions extends JFrame implements ActionListener {
             new MiniStatement(pinNumber).setVisible(true);
         }
     }
+    /*
+     * @brief Método principal para ejecutar la operación para realizar movimientos accesibles en la cuenta del cliente.
+     * @author Atom Alexander M. Nava
+     * @date 17/08/24
+     */
     public static void main(String[] args) {
         new Transactions("");
     }
