@@ -5,12 +5,28 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.Random;
 
+/*
+ * @brief La clase 'SignupThre', representada por la página 3, despliega los campos finales a llenar para
+ *        la entrega de la tarjeta bancaria con terminación XXXX-XXXX-XXXX-NNNN, además de proporcionar el PIN.
+ *        Únicamente habra que llenar los campos vacíos con la información de la cuenta y los servicios requeridos.
+ *        Al final, cuando el usuario se cercioro de que toda la información completada sea correcta, se le desplegara su
+ *        su número de tarjeta con su PIN
+ * @author Atom Alexander M. Nava
+ * @date 17/08/24
+ */
 public class SignupThree extends JFrame implements ActionListener {
 
+    //Variables gloables
     JRadioButton r1, r2, r3, r4;
     JCheckBox c1, c2, c3, c4, c5, c6, c7;
     JButton submit, cancel;
     String formNo;
+    /*
+     * @brief Constructor 'SignupThree' para la construcción de una ventana mayor, formulario final para la obtención 
+     *        de los datos de la cuenta bancaria.
+     * @author Atom Alexander M. Nava
+     * @date 17/08/24
+     */
     SignupThree(String formNo){
         this.formNo = formNo;
         setLayout(null);
@@ -155,6 +171,17 @@ public class SignupThree extends JFrame implements ActionListener {
         setVisible(true);
     }
 
+    /*
+     * @brief Implementación de la interfaz 'ActionListener' en orden para responder a eventos. Al contar con una experiencia 
+     *        personalizada para el usuario, deberá especificar el tipo de cuenta que se está manejando, (esta información también
+     *        se guardara en la base de datos) las opciones son:
+     *        1. Saving Account
+     *        2. Fixed Deposit Account
+     *        3. Current Account
+     *        4. Recurring Deposit Account
+     * @author Atom Alexander M. Nava
+     * @date 17/08/24
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == submit) {
@@ -168,6 +195,7 @@ public class SignupThree extends JFrame implements ActionListener {
             } else if (r4.isSelected()) {
                 accountType = "Recurring Deposit Account";
             }
+            // Código para generar el número de la tarjeta y el PIN aleatoriamente
             Random random = new Random();
             String cardNumber = "" + Math.abs((random.nextLong() % 90000000L) + 5040936000000000L);
             String pinNumber = "" + Math.abs((random.nextLong() % 9000L) + 1000L);
@@ -190,12 +218,13 @@ public class SignupThree extends JFrame implements ActionListener {
                 if (accountType.equals("")) {
                     JOptionPane.showMessageDialog(null, "Account Type is required...");
                 } else {
+                    //Conexión con la base de datos MySQL
                     Conn conn = new Conn();
                     String queryl = "insert into signupthree values('" + formNo + "', '" + accountType + "', '" + cardNumber + "', '" + pinNumber + "', '" + facility + "')";
                     String queryl2 = "insert into login values('" + formNo + "', '" + cardNumber + "', '" + pinNumber + "')";
                     conn.s.executeUpdate(queryl);
                     conn.s.executeUpdate(queryl2);
-
+                    //Insertar los datos de la mesa 'signuptwo' y 'signupthree' 
                     JOptionPane.showMessageDialog(null, "Card Number " + cardNumber +
                             "\n Pin: " + pinNumber);
 
@@ -211,6 +240,12 @@ public class SignupThree extends JFrame implements ActionListener {
         }
     }
 
+    /*
+     * @brief Método principal para ejecutar todo el código de la clase 'SignupThree' a fin de la obtención
+     *        de los datos finales para proporcionar el número de tarjeta y PIN
+     * @author Atom Alexander M. Nava
+     * @date 17/08/24
+     */
     public static void main(String[] args) {
       new SignupThree("");
         System.out.println();
