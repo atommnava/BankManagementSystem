@@ -4,25 +4,40 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+/*
+ * @brief La clase 'SignupTwo' destaca los datos personales un poco menos relevantes, pero no por ellos menos importantes.
+ *        Similar a la clase 'SignupOne', integra radioButtons pero involucra tambien comboBoxes para poder escojer entre las
+ *        diferentes opciones.
+ * @author Atom Alexander M. Nava
+ * @date 16/08/24
+ */
 public class SignupTwo extends JFrame implements ActionListener {
+    //Variables globales
     JTextField curp, zipCode;
     JButton next;
     JRadioButton sYes, sNo, eYes, eNo;
     JComboBox religion, category, occupation, education, income;
     String formNo;
-    SignupTwo(String formno)
+    /*
+     * @brief Constructor 'SignupTwo' para la entrada de datos, representada como la página 2. 
+     * @param formNo. El parámetro 'formNo' tiene la función de asignar el número de formualario correspondiente
+     *                a cada cliente que fue ingresando en la página 1. Esto ofrece mayor organización y manejo de los datos.
+     * @author Atom Alexander M. Nava
+     * @date 16/08/24 
+     */
+    SignupTwo(String formNo)
     {
         this.formNo = formNo;
         setLayout(null);
         setTitle("NEW ACCOUNT APPLICATION FORM - PAGE 2");
 
         JLabel additionalDetails = new JLabel("Page 2: Additional Details");
-        additionalDetails.setFont(new Font("Serif", Font.BOLD, 22));
+        additionalDetails.setFont(new Font("Raleway", Font.BOLD, 22));
         additionalDetails.setBounds(290, 80, 400, 30);
         add(additionalDetails);
 
         JLabel name = new JLabel("Religion:");
-        name.setFont(new Font("Serif", Font.BOLD, 20));
+        name.setFont(new Font("Raleway", Font.BOLD, 20));
         name.setBounds(100, 140, 100, 30);
         add(name);
 
@@ -33,7 +48,7 @@ public class SignupTwo extends JFrame implements ActionListener {
         add(religion);
 
         JLabel fName = new JLabel("Category:");
-        fName.setFont(new Font("Serif", Font.BOLD, 20));
+        fName.setFont(new Font("Raleway", Font.BOLD, 20));
         fName.setBounds(100, 190, 200, 30);
         add(fName);
 
@@ -42,20 +57,9 @@ public class SignupTwo extends JFrame implements ActionListener {
         category.setBounds(300, 190, 400, 30);
         category.setBackground(Color.WHITE);
         add(category);
-/*
-        nameTextField = new JTextField();
-        nameTextField.setFont(new Font("Serif", Font.BOLD, 14));
-        nameTextField.setBounds(300, 140, 400, 30);
-        add(nameTextField);
-
-        fnameTextField = new JTextField();
-        fnameTextField.setFont(new Font("Serif", Font.BOLD, 14));
-        fnameTextField.setBounds(300, 190, 400, 30);
-        add(fnameTextField);
- */
 
         JLabel dob = new JLabel("Income:");
-        dob.setFont(new Font("Serif", Font.BOLD, 20));
+        dob.setFont(new Font("Raleway", Font.BOLD, 20));
         dob.setBounds(100, 240, 200, 30);
         add(dob);
 
@@ -67,12 +71,12 @@ public class SignupTwo extends JFrame implements ActionListener {
         add(income);
 
         JLabel gender = new JLabel("Educational:");
-        gender.setFont(new Font("Serif", Font.BOLD, 20));
+        gender.setFont(new Font("Raleway", Font.BOLD, 20));
         gender.setBounds(100, 290, 200, 30);
         add(gender);
 
         JLabel email = new JLabel("Qualification:");
-        email.setFont(new Font("Serif", Font.BOLD, 20));
+        email.setFont(new Font("Raleway", Font.BOLD, 20));
         email.setBounds(100, 315, 200, 30);
         add(email);
 
@@ -84,7 +88,7 @@ public class SignupTwo extends JFrame implements ActionListener {
         add(education);
 
         JLabel maritalS = new JLabel("Occupation:");
-        maritalS.setFont(new Font("Serif", Font.BOLD, 20));
+        maritalS.setFont(new Font("Raleway", Font.BOLD, 20));
         maritalS.setBounds(100, 390, 200, 30);
         add(maritalS);
 
@@ -96,27 +100,27 @@ public class SignupTwo extends JFrame implements ActionListener {
         add(occupation);
 
         JLabel address = new JLabel("CURP:");
-        address.setFont(new Font("Serif", Font.BOLD, 20));
+        address.setFont(new Font("Raleway", Font.BOLD, 20));
         address.setBounds(100, 440, 200, 30);
         add(address);
 
         curp = new JTextField();
-        curp.setFont(new Font("Serif", Font.BOLD, 14));
+        curp.setFont(new Font("Raleway", Font.BOLD, 14));
         curp.setBounds(300, 440, 400, 30);
         add(curp) ;
 
         JLabel city = new JLabel("ZIP Code:");
-        city.setFont(new Font("Serif", Font.BOLD, 20));
+        city.setFont(new Font("Raleway", Font.BOLD, 20));
         city.setBounds(100, 490, 200, 30);
         add(city);
 
         zipCode = new JTextField();
-        zipCode.setFont(new Font("Serif", Font.BOLD, 14));
+        zipCode.setFont(new Font("Raleway", Font.BOLD, 14));
         zipCode.setBounds(300, 490, 400, 30);
         add(zipCode);
 
         JLabel state = new JLabel("Senior Citizen:");
-        state.setFont(new Font("Serif", Font.BOLD, 20));
+        state.setFont(new Font("Raleway", Font.BOLD, 20));
         state.setBounds(100, 540, 200, 30);
         add(state);
 
@@ -135,7 +139,7 @@ public class SignupTwo extends JFrame implements ActionListener {
         maritalGroup.add(sNo);
 
         JLabel pinC = new JLabel("Existing Account:");
-        pinC.setFont(new Font("Serif", Font.BOLD, 20));
+        pinC.setFont(new Font("Raleway", Font.BOLD, 20));
         pinC.setBounds(100, 590, 200, 30);
         add(pinC);
 
@@ -156,7 +160,7 @@ public class SignupTwo extends JFrame implements ActionListener {
         next = new JButton("Next");
         next.setBackground(Color.BLACK);
         next.setForeground(Color.BLACK);
-        next.setFont(new Font("Serif", Font.BOLD, 14));
+        next.setFont(new Font("Raleway", Font.BOLD, 14));
         next.setBounds(620, 660, 80, 30);
         next.addActionListener(this);
         add(next);
@@ -168,6 +172,14 @@ public class SignupTwo extends JFrame implements ActionListener {
 
     }
 
+    /*
+     * @brief Implementación de la interfaz 'ActionListener' para la respuesta a diversos eventos.
+     *        Embona la información correspondiente con su tipo de dato, utilizando la función .getSelectedItem()
+     *        que los almacena temporalmente.
+     * @param e. Sin uso
+     * @author Atom Alexander M. Nava
+     * @date 16/08/24
+     */
     public void actionPerformed(ActionEvent e)
     {
         String sReligion = (String)religion.getSelectedItem();
@@ -193,19 +205,28 @@ public class SignupTwo extends JFrame implements ActionListener {
         String sCurp = curp.getText();
         String sZip = zipCode.getText();
         try {
-
+                // Conexción con MySQL
                 Conn c = new Conn();
                 String query = "insert into signupTwo values('" +
                         formNo + "', '" + sReligion + "', '" + sCategory + "', '" + sIncome + "'," +
                         " '" + sEducation + "', '" + sOccupation + "', '" + sCurp + "', '" + sZip + "', '" + seniorCitizen + "', '" + existingAccount + "')";
                 c.s.executeUpdate(query);
+
             //Signup 3 Object
+            setVisible(false);
+            new SignupThree(formNo).setVisible(true);
+
         } catch(Exception ex) {
             System.out.println(ex);
         }
     }
 
-
+    /*
+     * @brief Método principal para la apertura de la página 2, 
+     *        con el fin de la obtención de los datos.
+     * @author Atom Alexander M. Nava
+     * @date 16/08/24
+     */
     public static void main(String[] args) {
         new SignupTwo("");
     }
