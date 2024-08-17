@@ -24,6 +24,8 @@ public class SignupThree extends JFrame implements ActionListener {
     /*
      * @brief Constructor 'SignupThree' para la construcción de una ventana mayor, formulario final para la obtención 
      *        de los datos de la cuenta bancaria.
+     * @param formNo. Su funcionalidad es para llevar el correcto manejo de las cuentas de banco en función de su
+     *                número de formulario.
      * @author Atom Alexander M. Nava
      * @date 17/08/24
      */
@@ -179,6 +181,7 @@ public class SignupThree extends JFrame implements ActionListener {
      *        2. Fixed Deposit Account
      *        3. Current Account
      *        4. Recurring Deposit Account
+     * @param e. Implementamos el boton 'Submit' a fin de añadir por último el beneficio de la duda al cliente para en caso de retractarse.
      * @author Atom Alexander M. Nava
      * @date 17/08/24
      */
