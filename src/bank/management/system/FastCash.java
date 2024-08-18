@@ -8,16 +8,37 @@ import java.sql.Date;
 import java.sql.*;
 import java.util.*;
 
+/*
+ * @brief Clase 'FastCash' ofrece la posibilidad al cliente de una rápida y eficiente manera de desembolsar efectivo para una ocación
+ *        esporadica, es una funcionalidad interesante y destacada que tienen los cajeros ATM de hoy en día.
+ *        El programa le da libertad al clietnre para que retire cantidades hormiga, como son las siguientes:
+ *        1. $ 100      4. $2,000
+ *        2. $ 500      5. $5,000
+ *        3. $ 1,000    6. $10,000
+ *        Depsues de que el cliente haya tomado una decisíon, se le enviar un mensaje al cliente, 
+ *        indicando si la orden se realizo con éxito.
+ * @author Atom Alexander M. Nava
+ * @date 17/08/24
+ */
 public class FastCash extends JFrame implements ActionListener {
 
+    // Variables globales
     JButton deposit, withdrawl, miniStatement, pinChange,
             fastCash, balanceenQuiry, exit;
     String pinNumber;
+    /*
+     * @brief Constructor 'FastCash' que desarrolla la parte gráfica para el usuario, en orden para realizar movimientos en el cajero
+     *        ATM, el cliente tiene la posibilidad de desembolsar poco dinero.
+     * @param formNo. Su funcionalidad es para llevar el correcto manejo de las cuentas de banco en función de su
+     *                número de formulario. 
+     * @author Atom Alexander M. Nava
+     * @date 17/08/24
+     */
     FastCash(String pinNumber){
         this.pinNumber = pinNumber;
         setLayout(null);
 
-        ImageIcon i1= new ImageIcon(ClassLoader.getSystemResource("icons/atm.jpg"));
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/atm.jpg"));
         Image i2 = i1.getImage().getScaledInstance(900,900, Image.SCALE_DEFAULT);
         ImageIcon i3 = new ImageIcon(i2);
         JLabel image = new JLabel(i3);
@@ -70,6 +91,13 @@ public class FastCash extends JFrame implements ActionListener {
         setUndecorated(true);
         setVisible(true);
     }
+    /* 
+     * @brief Implementación de la interfaz 'ActionListener'.
+     *        Estructura del código con la que funciona la parte gráfica con el sistema de cajero,
+     *        con el cual el cliente tendra la libertad de retirar una cantidad pequeña de efectivo. 
+     * @author Atom Alexander M. Nava
+     * @date 17/08/24
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == exit){
@@ -77,6 +105,8 @@ public class FastCash extends JFrame implements ActionListener {
             new Transactions(pinNumber).setVisible(true);
         } else {
             String amount = ((JButton)e.getSource()).getText().substring(3); // 500 Ds
+
+            // Conexión con la base de datos MySQL
             Conn c = new Conn();
             try {
                 ResultSet rs = c.s.executeQuery("select * from bank where pin = '" + pinNumber + "'");
@@ -93,6 +123,7 @@ public class FastCash extends JFrame implements ActionListener {
                     JOptionPane.showMessageDialog(null, "insufficient balance");
                     return;
                 }
+                // Obtención de la fecha en que se expidió la orden
                 Date date = new Date(System.currentTimeMillis());
                 String query = "insert into bank values('" + pinNumber + "', '" + date + "', 'Withdrawl', '" + amount + "')";
                 c.s.executeUpdate(query);
@@ -105,6 +136,12 @@ public class FastCash extends JFrame implements ActionListener {
             }
         }
     }
+     /*
+     * @brief Método principal en donde se ejecutara la funcionalidad para la visualización  
+     *        de las diferentes opciones a las que el cliente puede acceder.
+     * @author Atom Alexander M. Nava
+     * @date 17/08/24
+     */
     public static void main(String[] args) {
         new FastCash("");
     }
